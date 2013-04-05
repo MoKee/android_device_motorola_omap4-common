@@ -9,10 +9,10 @@ loglevel 8
     mkdir /storage/sdcard0 0000 system system
     mkdir /storage/sdcard1 0000 system system
     # for backwards compatibility
-    symlink /storage/sdcard1 /sdcard
-    symlink /storage/sdcard1 /mnt/sdcard
-    symlink /storage/sdcard0 /sdcard-ext
-    symlink /storage/sdcard0 /mnt/sdcard-ext
+    symlink /storage/sdcard0 /sdcard
+    symlink /storage/sdcard0 /mnt/sdcard
+    symlink /storage/sdcard1 /sdcard-ext
+    symlink /storage/sdcard1 /mnt/sdcard-ext
 
     # create removable USB Mass Storage mountpoints
     mkdir /storage/usb0 0000 system system
