@@ -8,4 +8,9 @@
     <string name="storage_switch_summary_off">使用内部扩展存储来存放程序和媒体文件</string>
     <string name="storage_switch_summary_on">使用外部存储来存放程序和媒体文件</string>
     <string name="storage_switch_unavailable">这个设备没有内部扩展存储</string>
+    <string name="category_telephony">GSM电话选项</string>
+    <string name="gsm_signalstrength_title">启用GSM信号强度修复</string>
+    <string name="gsm_signalstrength_summary_off">使用CDMA/LTE信号强度指示器</string>
+    <string name="gsm_signalstrength_summary_on">使用GSM信号强度指示器</string>
+    <string name="gsm_signalstrength_unavailable">已禁用:该设备为GSM制式</string>
 </resources>
