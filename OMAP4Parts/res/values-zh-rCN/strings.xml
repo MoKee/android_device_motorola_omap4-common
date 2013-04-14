@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">OMAP4平台设置</string>
+    <string name="app_name">高级设置</string>
     <string name="main_title">摩托罗拉OMAP4平台设置</string>
     <string name="category_storage">存储</string>
     <string name="category_storage_summary">需要重启才能生效</string>
