@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">高级设置</string>
-    <string name="main_title">摩托罗拉OMAP4平台设置</string>
     <string name="category_storage">存储</string>
-    <string name="category_storage_summary">需要重启才能生效</string>
+    <string name="reboot_summary">需要重启才能生效</string>
     <string name="storage_switch_title">使用外部存储</string>
     <string name="storage_switch_summary_off">使用内部扩展存储来存放程序和媒体文件</string>
     <string name="storage_switch_summary_on">使用外部存储来存放程序和媒体文件</string>
