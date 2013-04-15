@@ -12,4 +12,8 @@
     <string name="gsm_signalstrength_summary_off">使用CDMA/LTE信号强度指示器</string>
     <string name="gsm_signalstrength_summary_on">使用GSM信号强度指示器</string>
     <string name="gsm_signalstrength_unavailable">已禁用:该设备为GSM制式</string>
+    <string name="reboot_prompt_title">需要重新启动</string>
+    <string name="reboot_prompt_message">为了改变配置，需要重新启动。要立即重新启动吗？</string>
+    <string name="yes">确定</string>
+    <string name="no">取消</string>
 </resources>
