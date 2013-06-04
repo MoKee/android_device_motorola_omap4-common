@@ -1,4 +1,4 @@
-ifeq ($(BOARD_VENDOR),motorola-omap4)
+ifneq ($(filter spyder umts_spyder,$(TARGET_DEVICE)),)
 
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
