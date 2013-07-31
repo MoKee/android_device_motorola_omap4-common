@@ -72,6 +72,9 @@
 #define AID_CLAT          1029  /* clat part of nat464 */
 #define AID_LOOP_RADIO    1030  /* loop radio devices */
 #define AID_MEDIA_DRM     1031  /* MediaDrm plugins */
+#define AID_AUDIT         1032  /* audit daemon */
+
+#define AID_THEMEMAN      1300  /* theme manager */
 
 #define AID_SHELL         2000  /* adb and debug shell user */
 #define AID_CACHE         2001  /* cache access */
@@ -181,6 +184,8 @@ static const struct android_id_info android_ids[] = {
     { "nobody",    AID_NOBODY, },
     { "clat",      AID_CLAT, },
     { "mediadrm",  AID_MEDIA_DRM, },
+    { "theme_man", AID_THEMEMAN },
+    { "audit",      AID_AUDIT, },
 };
 
 #define android_id_count \
@@ -212,16 +217,16 @@ static const struct fs_path_config android_dirs[] = {
     { 00770, AID_DHCP,   AID_DHCP,   0, "data/misc/dhcp" },
     { 00775, AID_MEDIA_RW, AID_MEDIA_RW, 0, "data/media" },
     { 00775, AID_MEDIA_RW, AID_MEDIA_RW, 0, "data/media/Music" },
+    { 00771, AID_SYSTEM, AID_SYSTEM, 0, "data" },
     { 00777, AID_SYSTEM, AID_SYSTEM, 0, "data/anr" },
-    { 00771, AID_MOT_TCMD,  AID_SHELL, 0,  "data/local/12m/batch" },
-    { 00771, AID_MOT_TCMD,  AID_SHELL, 0,  "data/local/12m" },
-    { 00771, AID_MOT_TCMD,  AID_SHELL, 0,  "data/local/tmp" },
+    { 00771, AID_MOT_TCMD,  AID_SHELL, 0, "data/local/12m/batch" },
+    { 00771, AID_MOT_TCMD,  AID_SHELL, 0, "data/local/12m" },
+    { 00771, AID_MOT_TCMD,  AID_SHELL, 0, "data/local/tmp" },
     { 00775, AID_SYSTEM, AID_SYSTEM, 0, "data/tombstones" },
     { 00777, AID_SYSTEM, AID_SYSTEM, 0, "data/touchpad" },
-    { 00770, AID_RADIO,  AID_LOG, 0,    "data/logger" },
-    { 00755, AID_ROOT,   AID_ROOT, 0,   "system/usr/bin" },
-    { 00775, AID_ROOT,   AID_ROOT, 0,   "system/etc/touchpad" },
-    { 00771, AID_SYSTEM, AID_SYSTEM, 0, "data" },
+    { 00770, AID_RADIO,  AID_LOG,    0, "data/logger" },
+    { 00755, AID_ROOT,   AID_ROOT,   0, "system/usr/bin" },
+    { 00775, AID_ROOT,   AID_ROOT,   0, "system/etc/touchpad" },
     { 00750, AID_ROOT,   AID_SHELL,  0, "sbin" },
     { 00755, AID_ROOT,   AID_ROOT,   0, "system/addon.d" },
     { 00755, AID_ROOT,   AID_SHELL,  0, "system/bin" },
@@ -246,6 +251,7 @@ static const struct fs_path_config android_files[] = {
     { 00550, AID_ROOT,      AID_SHELL,     0, "system/etc/init.ril" },
     { 00550, AID_ROOT,      AID_SHELL,     0, "system/etc/init.testmenu" },
     { 00550, AID_DHCP,      AID_SHELL,     0, "system/etc/dhcpcd/dhcpcd-run-hooks" },
+    { 00440, AID_BLUETOOTH, AID_BLUETOOTH, 0, "system/etc/dbus.conf" },
     { 00444, AID_RADIO,     AID_AUDIO,     0, "system/etc/AudioPara4.csv" },
     { 00555, AID_ROOT,      AID_ROOT,      0, "system/etc/ppp/*" },
     { 00555, AID_ROOT,      AID_ROOT,      0, "system/etc/rc.*" },
