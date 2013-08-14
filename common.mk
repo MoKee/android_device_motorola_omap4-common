@@ -24,7 +24,6 @@ PRODUCT_COPY_FILES += \
     $(COMMON_FOLDER)/prebuilt/bin/wifical.sh:system/bin/wifical.sh \
     $(COMMON_FOLDER)/prebuilt/bin/wificalcheck.sh:system/bin/wificalcheck.sh \
     $(COMMON_FOLDER)/prebuilt/etc/gps.conf:system/etc/gps.conf \
-    $(COMMON_FOLDER)/prebuilt/etc/localprop:system/etc/localprop \
     $(COMMON_FOLDER)/prebuilt/etc/wifi/wlan_fem.ini:system/etc/wifi/wlan_fem.ini
 
 # Device overlay
@@ -86,8 +85,7 @@ PRODUCT_PACKAGES += \
 
 # Misc
 PRODUCT_PACKAGES += \
-    com.android.future.usb.accessory \
-    OMAP4Parts
+    com.android.future.usb.accessory
 
 # Motorola Binaries
 PRODUCT_PACKAGES += \
@@ -175,10 +173,13 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += fstab.mapphone_cdma
 
 # Kexec files
+ifndef TARGET_USES_CUSTOM_KEXECFILES
 PRODUCT_COPY_FILES += \
     $(COMMON_FOLDER)/kexec/arm_kexec.ko:system/etc/kexec/arm_kexec.ko \
     $(COMMON_FOLDER)/kexec/kexec.ko:system/etc/kexec/kexec.ko \
-    $(COMMON_FOLDER)/kexec/uart.ko:system/etc/kexec/uart.ko \
+    $(COMMON_FOLDER)/kexec/uart.ko:system/etc/kexec/uart.ko
+endif
+PRODUCT_COPY_FILES += \
     $(COMMON_FOLDER)/kexec/atags:system/etc/kexec/atags \
     $(COMMON_FOLDER)/kexec/kexec:system/etc/kexec/kexec
 

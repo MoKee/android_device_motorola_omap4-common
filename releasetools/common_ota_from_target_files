@@ -437,11 +437,6 @@ def WriteFullOTAPackage(input_zip, output_zip):
   Item.GetMetadata(input_zip)
   Item.Get("system").SetPermissions(script)
 
-  # Copy data/local.prop
-  script.Mount("/data")
-  script.CopyDataLocalProp()
-  script.Unmount("/data")
-
 #  common.CheckSize(boot_img.data, "boot.img", OPTIONS.info_dict)
 #  common.ZipWriteStr(output_zip, "boot.img", boot_img.data)
   script.ShowProgress(0.2, 0)
@@ -454,8 +449,6 @@ def WriteFullOTAPackage(input_zip, output_zip):
 #  script.WriteRawImage("/boot", "boot.img")
 
   script.ShowProgress(0.1, 0)
-  script.Print("If you installed this in other than romslot-1")
-  script.Print("it will not boot!!!!!! This will be fixed soon.")
   device_specific.FullOTA_InstallEnd()
 
   if OPTIONS.extra_script is not None:
