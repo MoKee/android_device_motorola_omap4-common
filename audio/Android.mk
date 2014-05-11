@@ -15,3 +15,44 @@ ifeq ($(BOARD_HAVE_BLUETOOTH),true)
 endif
 
 include $(BUILD_SHARED_LIBRARY)
+
+
+###
+### OMAP HDMI AUDIO HAL
+###
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := audio.hdmi.$(TARGET_BOARD_PLATFORM)
+
+LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
+LOCAL_SRC_FILES := hdmi_audio_hw.c \
+	hdmi_audio_utils.c
+
+LOCAL_C_INCLUDES += \
+	external/tinyalsa/include \
+	system/media/audio_utils/include \
+	system/media/audio_effects/include
+LOCAL_SHARED_LIBRARIES := liblog libcutils libtinyalsa libaudioutils libdl
+LOCAL_MODULE_TAGS := optional
+
+include $(BUILD_SHARED_LIBRARY)
+
+###
+### Wrapper for Motorola's HAL
+###
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := audio.primary.$(TARGET_DEVICE)
+
+LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
+LOCAL_SRC_FILES := wrapper.c
+
+LOCAL_C_INCLUDES += \
+	system/media/audio_utils/include \
+	system/media/audio_effects/include
+LOCAL_SHARED_LIBRARIES := liblog libcutils libaudioutils libdl
+LOCAL_MODULE_TAGS := optional
+
+include $(BUILD_SHARED_LIBRARY)

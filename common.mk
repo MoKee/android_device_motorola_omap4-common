@@ -28,7 +28,8 @@ PRODUCT_COPY_FILES += \
     $(COMMON_FOLDER)/prebuilt/bin/wifical.sh:system/bin/wifical.sh \
     $(COMMON_FOLDER)/prebuilt/bin/wificalcheck.sh:system/bin/wificalcheck.sh \
     $(COMMON_FOLDER)/prebuilt/etc/gps.conf:system/etc/gps.conf \
-    $(COMMON_FOLDER)/prebuilt/etc/wifi/wlan_fem.ini:system/etc/wifi/wlan_fem.ini
+    $(COMMON_FOLDER)/prebuilt/etc/wifi/wlan_fem.ini:system/etc/wifi/wlan_fem.ini \
+    $(COMMON_FOLDER)/prebuilt/etc/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
 
 # Device overlay
 DEVICE_PACKAGE_OVERLAYS += $(COMMON_FOLDER)/overlay
@@ -43,14 +44,23 @@ PRODUCT_PACKAGES += \
 
 # Hardware HALs
 PRODUCT_PACKAGES += \
+    audio.primary.maserati \
+    audio.primary.spyder \
+    audio.primary.umts_spyder \
+    audio.primary.targa \
     audio.usb.default \
-    audio.a2dp.default
+    audio.a2dp.default \
+    audio.hdmi.omap4
 
 PRODUCT_PACKAGES += \
     audio_policy.omap4 \
     libasound \
     libaudioutils \
-    libaudiohw_legacy
+    libaudiohw_legacy \
+    tinyplay \
+    tinycap \
+    tinymix \
+    tinypcminfo
 
 # BlueZ test tools
 PRODUCT_PACKAGES += \
@@ -134,6 +144,7 @@ PRODUCT_PACKAGES += \
 # Permissions files
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
+    frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
     frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
     frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml \
@@ -207,6 +218,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     com.ti.omap_enhancement=true \
     ro.bq.gpu_to_cpu_unsupported=1 \
     hwui.render_dirty_regions=false \
+    persist.demo.hdmirotationlock=true \
     persist.sys.root_access=3 \
     ro.product.use_charge_counter=1 \
     persist.sys.usb.config=mtp,adb \
@@ -232,7 +244,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.media.capture.flashIntensity=100 \
     ro.media.capture.classification=classF \
     ro.media.panorama.defres=3264x1840 \
-    ro.media.panorama.frameres=1280x720
+    ro.media.panorama.frameres=1280x720 \
+    media.stagefright.cache-params=18432/20480/15
 
 # OpenglES
 PRODUCT_PROPERTY_OVERRIDES += \
