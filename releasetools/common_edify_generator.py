@@ -111,8 +111,12 @@ class EdifyGenerator(object):
   def RunBackup(self, command):
     self.script.append('package_extract_file("system/bin/backuptool.sh", "/tmp/backuptool.sh");')
     self.script.append('package_extract_file("system/bin/backuptool.functions", "/tmp/backuptool.functions");')
-    self.script.append('set_perm(0, 0, 0777, "/tmp/backuptool.sh");')
-    self.script.append('set_perm(0, 0, 0644, "/tmp/backuptool.functions");')
+    if not self.info.get("use_set_metadata", False):
+      self.script.append('set_perm(0, 0, 0755, "/tmp/backuptool.sh");')
+      self.script.append('set_perm(0, 0, 0644, "/tmp/backuptool.functions");')
+    else:
+      self.script.append('set_metadata("/tmp/backuptool.sh", "uid", 0, "gid", 0, "mode", 0755);')
+      self.script.append('set_metadata("/tmp/backuptool.functions", "uid", 0, "gid", 0, "mode", 0644);')
     self.script.append(('run_program("/tmp/backuptool.sh", "%s");' % command))
     if command == "restore":
         self.script.append('delete("/system/bin/backuptool.sh");')
@@ -157,8 +161,11 @@ class EdifyGenerator(object):
     fstab = self.info.get("fstab", None)
     if fstab:
       p = fstab[mount_point]
+      fs_type = p.fs_type
+      if fs_type == 'ext4':
+        fs_type = 'ext3'
       self.script.append('mount("%s", "%s", "%s", "%s");' %
-                         (p.fs_type, common.PARTITION_TYPES[p.fs_type],
+                         (fs_type, common.PARTITION_TYPES[fs_type],
                           p.device, p.mount_point))
       self.mounts.add(p.mount_point)
 

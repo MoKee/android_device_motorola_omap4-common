@@ -43,6 +43,9 @@ OMAP_ENHANCEMENT := true
 #BLTSVILLE_ENHANCEMENT :=true
 BOARD_USE_TI_ENHANCED_DOMX := true
 
+# QCOM SELinux policy
+include device/qcom/sepolicy/sepolicy.mk
+
 # inherit from the proprietary version
 -include vendor/motorola/omap4-common/BoardConfigVendor.mk
 
@@ -68,7 +71,6 @@ TARGET_KRAIT_BIONIC_BBTHRESH := 64
 TARGET_KRAIT_BIONIC_PLDSIZE := 64
 
 # Kernel/Module Build
-TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
 TARGET_KERNEL_SOURCE := kernel/motorola/omap4-common
 TARGET_KERNEL_CONFIG := mapphone_mmi_defconfig
 TARGET_KERNEL_SELINUX_CONFIG := mapphone_mmi_selinux_defconfig
@@ -106,6 +108,7 @@ BOARD_VOLD_MAX_PARTITIONS := 32
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/virtual/android_usb/android0/f_mass_storage/lun%d/file"
 BOARD_MTP_DEVICE := "/dev/mtp"
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 734003200
 
 # Connectivity - Wi-Fi
 USES_TI_MAC80211 := true
@@ -147,7 +150,7 @@ ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=1
 ADDITIONAL_DEFAULT_PROPERTIES += ro.allow.mock.location=1
 
 # Recovery
-TARGET_RECOVERY_FSTAB = $(COMMON_FOLDER)/root/fstab.mapphone_cdma
+TARGET_RECOVERY_FSTAB = $(COMMON_FOLDER)/root/recovery.fstab
 RECOVERY_FSTAB_VERSION = 2
 BOARD_HAS_LOCKED_BOOTLOADER := true
 TARGET_PREBUILT_RECOVERY_KERNEL := device/motorola/omap4-common/recovery-kernel
@@ -162,7 +165,7 @@ TARGET_RECOVERY_PRE_COMMAND_CLEAR_REASON := true
 TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 DEVICE_RESOLUTION := 540x960
 TW_MAX_BRIGHTNESS := 254
-USE_SET_METADATA := false
+TARGET_USERIMAGES_USE_EXT4 := true
 
 # Graphics
 BOARD_EGL_CFG := device/motorola/omap4-common/prebuilt/etc/egl.cfg
@@ -174,8 +177,9 @@ TARGET_USES_OPENGLES_FOR_SCREEN_CAPTURE := true
 # Makefile variable and C/C++ macro to recognise DOMX version
 ifdef BOARD_USE_TI_ENHANCED_DOMX
     BOARD_USE_TI_DUCATI_H264_PROFILE := true
-    TI_CUSTOM_DOMX_PATH := device/motorola/omap4-common/domx
+    BOARD_USE_TI_CUSTOM_DOMX := true
     DOMX_PATH := device/motorola/omap4-common/domx
+    TARGET_SPECIFIC_HEADER_PATH += $(COMMON_FOLDER)/domx/omx_core/inc
     ENHANCED_DOMX := true
 else
     DOMX_PATH := hardware/ti/omap4xxx/domx
@@ -213,6 +217,7 @@ COMMON_GLOBAL_CFLAGS += -DBOARD_USE_MOTOROLA_DEV_ALIAS
 endif
 
 # Media / Radio
+COMMON_GLOBAL_CFLAGS += -DQCOM_LEGACY_UIDS
 # Off currently
 
 # OTA Packaging
@@ -240,18 +245,30 @@ BOARD_SEPOLICY_DIRS += \
     device/motorola/omap4-common/sepolicy
 
 BOARD_SEPOLICY_UNION += \
+    akmd8975.te \
+    battd.te \
     bluetooth.te \
     debuggered.te \
+    drmserver.te \
     file_contexts \
     device.te \
     dhcp.te \
     domain.te \
     file.te \
+    init.te \
     init_shell.te \
     mediaserver.te \
+    modemlog.te \
+    msp430.te \
     netd.te \
+    property.te \
     pvrsrvinit.te \
     rild.te \
+    smc.te \
     system.te \
     tee.te \
-    vold.te
+    thermal_manager.te \
+    uim.te \
+    vold.te \
+    whisperd.te \
+    wrigleyd.te
